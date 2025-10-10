@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { pipelineApi } from '../services/api';
-import './PipelineConfig.css';
+import './PipeLineConfig.css';
 
 export default function PipelineConfig({ onCreated }) {
   const [formData, setFormData] = useState({
