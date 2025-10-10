@@ -1,7 +1,7 @@
-package main.java.com.datapipeline.controller;
+package com.datapipeline.controller;
 
-import main.java.com.datapipeline.model.DataRecord;
-import main.java.com.datapipeline.service.DataPipelineService;
+import com.datapipeline.model.DataRecord;
+import com.datapipeline.service.DataPipelineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
