@@ -1,44 +1,52 @@
-name: Build Data Pipeline WAR
+name: Build and Test Data Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
+      # ===== BACKEND BUILD + TEST =====
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
           java-version: '17'
+          distribution: 'temurin'
 
+      - name: Build and test backend
+        working-directory: backend
+        run: |
+          mvn clean test package -DskipTests=false
+
+      # ===== FRONTEND BUILD + TEST =====
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
 
-      - name: Install Frontend Dependencies
-        working-directory: ./frontend
-        run: npm ci
+      - name: Install and test frontend
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run test -- --run
+          npm run build
 
-      - name: Build Frontend
-        working-directory: ./frontend
-        run: npm run build
+      # ===== PACKAGE WAR =====
+      - name: Package WAR
+        working-directory: backend
+        run: mvn package -DskipTests
 
-      - name: Build Backend (WAR)
-        working-directory: ./backend
-        run: mvn -B clean package --file pom.xml
-
-      - name: Upload WAR Artifact
+      # ===== UPLOAD WAR ARTIFACT =====
+      - name: Upload WAR artifact
         uses: actions/upload-artifact@v4
         with:
           name: data-pipeline-war
-          path: backend/target/data-pipeline.war
+          path: backend/target/*.war
