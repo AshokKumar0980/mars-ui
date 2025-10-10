@@ -1,4 +1,4 @@
-package com.datapipeline;
+package main.java.com.datapipeline;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

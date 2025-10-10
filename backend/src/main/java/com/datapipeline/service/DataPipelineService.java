@@ -1,6 +1,6 @@
-package com.datapipeline.service;
+package main.java.com.datapipeline.service;
 
-import com.datapipeline.model.DataRecord;
+import main.java.com.datapipeline.model.DataRecord;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

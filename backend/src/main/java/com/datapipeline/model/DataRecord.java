@@ -1,4 +1,4 @@
-package com.datapipeline.model;
+package main.java.com.datapipeline.model;
 
 public class DataRecord {
     private String id;
