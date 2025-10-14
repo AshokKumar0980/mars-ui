@@ -24,5 +24,5 @@ jobs:
       - name: Upload WAR artifact
         uses: actions/upload-artifact@v4
         with:
-          name: data-pipeline-war
-          path: backend/target/*.war
+          name: mars-ui-war
+          path: backend/target/mars-ui.war

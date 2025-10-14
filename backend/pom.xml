@@ -55,7 +55,7 @@
     </dependencies>
     
     <build>
-        <finalName>data-pipeline</finalName>
+        <finalName>mars-ui</finalName>
         <plugins>
             <!-- Spring Boot Maven Plugin -->
             <plugin>
