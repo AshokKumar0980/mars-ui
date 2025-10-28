@@ -1,5 +1,0 @@
-com/datapipeline/config/WebConfig.class
-com/datapipeline/model/DataRecord.class
-com/datapipeline/DataPipelineApplication.class
-com/datapipeline/service/DataPipelineService.class
-com/datapipeline/controller/DataController.class
