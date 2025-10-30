@@ -1,0 +1,303 @@
+/* ===========================
+   MODAL - ADD LEAD
+=========================== */
+.add-lead-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.add-lead-modal-content {
+  background: #fff;
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.add-lead-header {
+  background: var(--primary);
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  font-family: var(--font-main);
+  letter-spacing: 1.5px;
+  position: relative;
+  border-radius: 12px 12px 0 0;
+}
+
+.add-lead-close-button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.add-lead-close-button:hover {
+  color: var(--danger);
+  transform: scale(1.1);
+}
+
+/* ===========================
+   FORM ELEMENTS
+=========================== */
+.add-lead-form {
+  padding: 30px;
+}
+
+.add-lead-form label {
+  color: var(--label);
+  font-weight: 600;
+  font-family: var(--font-main);
+  display: block;
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+.add-lead-form input,
+.add-lead-form select,
+.add-lead-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  font-size: 14px;
+  font-family: var(--font-main);
+  font-weight: 400;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: #fff;
+}
+
+/* ✅ UPDATED FOCUS STYLE (removed orange outline) */
+.add-lead-form input:focus,
+.add-lead-form select:focus,
+.add-lead-form textarea:focus {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4); /* subtle blue glow */
+}
+
+/* Remove number input spinners */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* ===========================
+   SELECT STYLING (fallback)
+=========================== */
+.add-lead-form select option {
+  padding: 8px;
+  background: #fff;
+  color: var(--text);
+}
+
+.add-lead-form select option:checked,
+.add-lead-form select option:hover,
+.add-lead-form select:focus option:checked {
+  background: var(--primary) !important;
+  color: #fff !important;
+}
+
+/* ===========================
+   CUSTOM DROPDOWN
+=========================== */
+.custom-dropdown-wrapper {
+  position: relative;
+  margin-top: 15px;
+  font-family: var(--font-main);
+}
+
+.custom-dropdown-wrapper label {
+  color: var(--label);
+  font-weight: 600;
+  display: block;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.custom-dropdown {
+  background: #fff;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.custom-dropdown:hover {
+  border-color: var(--focus);
+  box-shadow: 0 0 4px rgba(1, 10,55, 0.5);
+}
+
+.custom-dropdown.open {
+  border-color: var(--focus);
+  box-shadow: 0 0 6px rgba(1, 10, 55, 0.5);
+}
+
+.selected-value {
+  color: #999;
+  font-size: 14px;
+  flex: 1;
+}
+
+.selected-value.has-value {
+  color: #333;
+}
+
+.dropdown-arrow {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #02010f;
+  pointer-events: none;
+}
+
+/* Options list */
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  margin-top: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  max-height: 180px;
+  overflow-y: auto;
+  animation: dropdownFade 0.2s ease;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-option {
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-option:hover {
+  background: var(--focus);
+  color: #fff;
+}
+
+.dropdown-option.selected {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* ===========================
+   WORD COUNTER
+=========================== */
+.add-lead-form .word-counter {
+  font-size: 12px;
+  color: #666;
+  text-align: right;
+  margin-top: 5px;
+  font-family: var(--font-main);
+}
+
+.add-lead-form .word-counter.warning {
+  color: #ff6b35;
+  font-weight: 600;
+}
+
+.add-lead-form .word-counter.error {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+/* ===========================
+   SUBMIT BUTTON
+=========================== */
+.add-lead-form button.submit {
+  padding: 14px 30px;
+  background: var(--info);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-main);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  min-width: 120px;
+  letter-spacing: 0.5px;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.add-lead-form button.submit:hover {
+  background: #003366;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 31, 63, 0.4);
+}
+
+.submit-button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+=========================== */
+@media (max-width: 768px) {
+  .add-lead-modal-content {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .add-lead-form {
+    padding: 20px;
+  }
+
+  .add-lead-header {
+    font-size: 20px;
+    padding: 15px;
+  }
+}

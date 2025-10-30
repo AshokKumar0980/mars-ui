@@ -1,0 +1,28 @@
+name: Build and Test Data Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+
+      # ===== PACKAGE WAR =====
+      - name: Package WAR
+        working-directory: backend
+        run: mvn package -DskipTests
+
+      # ===== UPLOAD WAR ARTIFACT =====
+      - name: Upload WAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mars-ui-war
+          path: backend/target/mars-ui.war

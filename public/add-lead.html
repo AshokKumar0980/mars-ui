@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JOB QUEUE</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&family=Montserrat:wght@500;700&display=swap');
+    
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    
+    body {
+      font-family: 'Exo 2', 'Montserrat', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      padding-bottom: 50px;
+    }
+    header {
+      background: #001f3f;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 700;
+      font-family: 'Exo 2', 'Montserrat', sans-serif;
+      letter-spacing: 1.5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    form {
+      background: #fff;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    label {
+      color: #800000;
+      font-weight: 600;
+      font-family: 'Exo 2', 'Montserrat', sans-serif;
+      display: block;
+      margin-top: 15px;
+      width: 300px;
+      font-size: 15px;
+    }
+    .required::after {
+      content: " *";
+      color: #d32f2f;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #bbb;
+      font-size: 14px;
+      font-family: 'Exo 2', 'Montserrat', sans-serif;
+      transition: all 0.2s ease;
+      box-sizing: border-box;
+      font-weight: 400;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #f3a04c;
+      box-shadow: 0 0 4px rgba(243,160,76,0.4);
+    }
+    .word-counter {
+      font-size: 12px;
+      color: #666;
+      text-align: right;
+      margin-top: 5px;
+      font-family: 'Exo 2', 'Montserrat', sans-serif;
+      font-weight: 400;
+    }
+    .word-counter.warning { color: #ff6b35; font-weight: 600; }
+    .word-counter.error { color: #d32f2f; font-weight: 700; }
+    .radio-group {
+      margin-top: 10px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      font-family: 'Exo 2', 'Montserrat', sans-serif;
+      color: #0D1B2A;
+      background: #f9f9f9;
+      padding: 12px 18px;
+      border-radius: 8px;
+      border: 2px solid #e0e0e0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 0;
+      min-width: 120px;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      font-size: 14px;
+    }
+    .radio-group label:hover {
+      background: #f0f8ff;
+      border-color: #f3a04c;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .radio-group input[type="radio"] {
+      width: auto;
+      margin: 0 8px 0 0;
+      accent-color: #f3a04c;
+    }
+    .radio-group label:has(input[type="radio"]:checked) {
+      background: linear-gradient(135deg, #f3a04c, #e68a00);
+      color: white;
+      border-color: #e68a00;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(243,160,76,0.3);
+    }
+    .radio-group label:has(input[type="radio"]:checked):hover {
+      background: linear-gradient(135deg, #e68a00, #cc7700);
+      transform: translateY(-2px);
+    }
+    button {
+      padding: 14px 30px;
+      background: #001f3f;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: 'Exo 2', 'Montserrat', sans-serif;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      letter-spacing: 0.5px;
+    }
+    button:hover {
+      background: #01101f;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,31,63,0.4);
+    }
+    .submit-button-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>JOB QUEUE</header>
+
+  <form id="jobForm">
+    <label class="required">Job Title / Job ID:</label>
+    <input type="text" name="jobTitleId" required />
+
+    <label class="required">Job Location:</label>
+    <input type="text" name="location" placeholder="City, State or Remote" required />
+
+    <label class="required">Job Type:</label>
+    <select name="jobType" required>
+      <option value="">-- Select Type --</option>
+      <option value="Full Time">Full Time</option>
+      <option value="Part Time">Part Time</option>
+      <option value="Contract">Contract</option>
+      <option value="Internship">Internship</option>
+    </select>
+
+    <label class="required">Work Mode:</label>
+    <select name="workArrangement" required>
+      <option value="">-- Select --</option>
+      <option value="Onsite">Onsite</option>
+      <option value="Hybrid">Hybrid</option>
+      <option value="Remote">Remote</option>
+    </select>
+
+    <label class="required">Job Description / Responsibilities (Max 500 words):</label>
+    <textarea name="description" id="description" rows="4" required maxlength="500"></textarea>
+    <div class="word-counter" id="wordCounter">0 / 500 words</div>
+
+    <label class="required">Years of Experience:</label>
+    <input type="number" name="experienceYears" min="0" placeholder="e.g. 3" required />
+
+    <label class="required">Education Level:</label>
+    <select name="education" required>
+      <option value="">-- Select Education --</option>
+      <option value="Bachelor">Bachelor's</option>
+      <option value="Master">Master's</option>
+    </select>
+
+    <label class="required">Job Industry:</label>
+    <input type="text" name="category" required />
+
+    <label class="required">Role:</label>
+    <select name="role" required>
+      <option value="">-- Select Role --</option>
+      <option value="Full Time">Full Time</option>
+      <option value="C2C">C2C</option>
+      <option value="W2">W2</option>
+    </select>
+
+    <label class="required">Expected Salary Range:</label>
+    <input type="text" name="expectedSalaryRange" placeholder="e.g. $60k–80k or $40–50/hr" required />
+
+    <label class="required">Visa Status:</label>
+    <select name="visaStatus" required>
+      <option value="">-- Select Visa Status --</option>
+      <option value="OPT">OPT</option>
+      <option value="H1">H1</option>
+      <option value="Green Card">Green Card</option>
+      <option value="Citizenship">Citizenship</option>
+      <option value="H4-EAD">H4-EAD</option>
+    </select>
+
+    <div class="submit-button-wrapper">
+      <button type="submit" class="submit">Submit</button>
+    </div>
+  </form>
+
+</body>
+</html>
