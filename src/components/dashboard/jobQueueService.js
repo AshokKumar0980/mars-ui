@@ -284,4 +284,3 @@ class JobQueueService {
     }
   }
 }
-export default new JobQueueService();
