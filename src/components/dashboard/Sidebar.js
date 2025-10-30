@@ -6,7 +6,7 @@ export default function Sidebar({ setSection, setQueueType }) {
   const [jobQueueOpen, setJobQueueOpen] = useState(false);
 
   const submenuClass =
-    "block py-1 px-3 rounded hover:bg-[#01040c] cursor-pointer font-normal";
+    "block py-1 px-3 rounded hover:bg-[#01040c] cursor-pointer font-normal text-left w-full";
   const parentClass =
     "flex justify-between items-center py-1.5 px-3 rounded hover:bg-[#01040c] cursor-pointer font-semibold";
 
@@ -15,12 +15,12 @@ export default function Sidebar({ setSection, setQueueType }) {
       <h2 className="text-center text-xl font-bold mb-4 text-[#9B2226]">MARS</h2>
 
       {/* Dashboard */}
-      <a
-        className="block py-1.5 px-3 rounded hover:bg-[#01040c] cursor-pointer"
+      <button
+        className="block py-1.5 px-3 rounded hover:bg-[#01040c] cursor-pointer w-full text-left"
         onClick={() => setSection("dashboard")}
       >
         Dashboard
-      </a>
+      </button>
 
       {/* Job Queue */}
       <div className="mt-2">
@@ -34,7 +34,7 @@ export default function Sidebar({ setSection, setQueueType }) {
 
         {jobQueueOpen && (
           <div className="ml-4 mt-1">
-            <a
+            <button
               className={submenuClass}
               onClick={() => {
                 setQueueType("global");
@@ -42,8 +42,8 @@ export default function Sidebar({ setSection, setQueueType }) {
               }}
             >
               Global Queue
-            </a>
-            <a
+            </button>
+            <button
               className={submenuClass}
               onClick={() => {
                 setQueueType("personal");
@@ -51,8 +51,8 @@ export default function Sidebar({ setSection, setQueueType }) {
               }}
             >
               Personal Queue
-            </a>
-            <a
+            </button>
+            <button
               className={submenuClass}
               onClick={() => {
                 setQueueType("wip");
@@ -60,8 +60,8 @@ export default function Sidebar({ setSection, setQueueType }) {
               }}
             >
               WIP Queue
-            </a>
-            <a
+            </button>
+            <button
               className={submenuClass}
               onClick={() => {
                 setQueueType("escalation");
@@ -69,8 +69,8 @@ export default function Sidebar({ setSection, setQueueType }) {
               }}
             >
               Escalation Queue
-            </a>
-            <a
+            </button>
+            <button
               className={submenuClass}
               onClick={() => {
                 setQueueType("failed");
@@ -78,8 +78,8 @@ export default function Sidebar({ setSection, setQueueType }) {
               }}
             >
               Failed Queue
-            </a>
-            <a
+            </button>
+            <button
               className={submenuClass}
               onClick={() => {
                 setQueueType("completed");
@@ -87,10 +87,8 @@ export default function Sidebar({ setSection, setQueueType }) {
               }}
             >
               Completed Queue
-            </a>
-
-            {/* ✅ Total On Hold submenu */}
-            <a
+            </button>
+            <button
               className={submenuClass}
               onClick={() => {
                 setQueueType("onHold");
@@ -98,12 +96,12 @@ export default function Sidebar({ setSection, setQueueType }) {
               }}
             >
               Total On Hold
-            </a>
+            </button>
           </div>
         )}
       </div>
 
-      {/* ✅ Profile Queue with new submenu */}
+      {/* Profile Queue */}
       <div className="mt-3">
         <div
           className={parentClass}
@@ -115,33 +113,30 @@ export default function Sidebar({ setSection, setQueueType }) {
 
         {profileOpen && (
           <div className="ml-4 mt-1">
-            
-          
-            <a
+            <button
               className={submenuClass}
-              onClick={() => setSection("addLead")} 
+              onClick={() => setSection("addLead")}
             >
               Add Lead
-            </a>
-
-            <a
+            </button>
+            <button
               className={submenuClass}
               onClick={() => setSection("addCandidate")}
             >
               Add Candidate
-            </a>
-            <a
+            </button>
+            <button
               className={submenuClass}
               onClick={() => setSection("searchLeads")}
             >
               Search Leads
-            </a>
-            <a
+            </button>
+            <button
               className={submenuClass}
               onClick={() => setSection("searchCandidates")}
             >
               Search Candidates
-            </a>
+            </button>
           </div>
         )}
       </div>
@@ -158,18 +153,18 @@ export default function Sidebar({ setSection, setQueueType }) {
 
         {trackingOpen && (
           <div className="ml-4 mt-1">
-            <a
+            <button
               className={submenuClass}
               onClick={() => setSection("interviewSubmitted")}
             >
               Resume Tracking Task
-            </a>
-            <a
+            </button>
+            <button
               className={submenuClass}
               onClick={() => setSection("interviewNotSubmitted")}
             >
               Ready for Review Task
-            </a>
+            </button>
           </div>
         )}
       </div>
