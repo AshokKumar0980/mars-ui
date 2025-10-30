@@ -1,14 +1,11 @@
 # ========================
 # Java / Maven (Backend)
 # ========================
-# Compiled files
 *.class
 *.jar
 *.war
 *.ear
 *.nar
-
-# Maven
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -23,14 +20,11 @@ buildNumber.properties
 # ========================
 # Node / React (Frontend)
 # ========================
-# Dependencies
 node_modules/
 /.pnp
 .pnp.js
-
-# Build outputs
-frontend/dist/
-frontend/build/
+build/
+dist/
 .next/
 out/
 
@@ -47,24 +41,17 @@ application-dev.properties
 # ========================
 # IDE & Editors
 # ========================
-# IntelliJ IDEA
 .idea/
 *.iml
 *.iws
 *.ipr
 out/
-
-# Eclipse
 .classpath
 .project
 .settings/
 bin/
-
-# VS Code
 .vscode/
 *.code-workspace
-
-# NetBeans
 nbproject/private/
 nbbuild/
 nbdist/
@@ -73,18 +60,13 @@ nbdist/
 # ========================
 # Operating System
 # ========================
-# macOS
 .DS_Store
 .AppleDouble
 .LSOverride
-
-# Windows
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
-
-# Linux
 *~
 .directory
 
@@ -101,7 +83,6 @@ logs/
 *.bak
 *.swp
 *.swo
-*~
 
 # ========================
 # Testing & Coverage
@@ -113,11 +94,6 @@ test-results/
 junit.xml
 
 # ========================
-# Build Scripts Output
-# ========================
-*.sh.log
-
-# ========================
 # Database
 # ========================
 *.db
@@ -125,30 +101,39 @@ junit.xml
 *.sqlite3
 
 # ========================
-# Other
+# Build Scripts Output
 # ========================
-.cache/
-.temp/
-*.pid
-*.seed
-*.pid.lock
+*.sh.log
 
 # ========================
 # GitHub / CI
 # ========================
 .github/workflows/*.tmp
 
-# Dependency locks (optional — keep only one)
+# ========================
+# Frontend Maven Plugin
+# ========================
+node/
+src/main/frontend/node/
+src/main/frontend/node_modules/
+
+# ========================
+# React Build Output
+# ========================
+build/
+dist/
+
+# Package manager locks (keep only one)
+# Uncomment the ones you DON'T use:
 # yarn.lock
-# package-lock.json
 # pnpm-lock.yaml
 
-# Temporary local tools
+# ========================
+# Temporary & Archives
+# ========================
 *.tgz
 *.zip
 *.tar
 *.gz
-
-# macOS Spotlight & Trash
 .Spotlight-V100
 .Trashes
