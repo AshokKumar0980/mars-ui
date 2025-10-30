@@ -22,22 +22,51 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      # Build WAR using Maven (this will also build React)
+      # Set up Node.js (to see better error messages)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      # Test React build first (to see detailed errors)
+      - name: Install npm dependencies
+        run: npm ci
+        continue-on-error: false
+
+      - name: Test React build
+        run: npm run build
+        continue-on-error: false
+
+      # Build WAR using Maven
       - name: Build WAR with Maven
-        run: mvn clean package -DskipTests
+        run: mvn clean package -DskipTests -X
+        continue-on-error: false
 
       # Upload WAR artifact
       - name: Upload WAR artifact
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: mars-ui-war
           path: target/mars-ui.war
           retention-days: 30
 
-      # Optional: Upload build info
+      # Upload build info
       - name: Upload build summary
         if: success()
         run: |
           echo "✅ WAR file built successfully!" >> $GITHUB_STEP_SUMMARY
           echo "📦 Artifact: mars-ui.war" >> $GITHUB_STEP_SUMMARY
           echo "📏 Size: $(ls -lh target/mars-ui.war | awk '{print $5}')" >> $GITHUB_STEP_SUMMARY
+
+      # Upload logs on failure
+      - name: Upload failure logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: |
+            **/*.log
+            target/
+          retention-days: 5
