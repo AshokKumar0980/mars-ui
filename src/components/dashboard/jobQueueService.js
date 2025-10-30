@@ -284,3 +284,6 @@ class JobQueueService {
     }
   }
 }
+
+const jobQueueService = new JobQueueService();
+export default jobQueueService;
